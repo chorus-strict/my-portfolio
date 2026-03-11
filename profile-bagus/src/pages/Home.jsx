@@ -67,7 +67,7 @@ export default function Home() {
           position: 'relative'
         }}>
           <img 
-            src="/buntut.png" 
+            src="/buntut.webp" 
             alt="Bagus Home"
             style={{
               width: '100%',
