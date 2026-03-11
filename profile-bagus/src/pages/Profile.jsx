@@ -1,92 +1,58 @@
 import React from 'react';
 
 export default function Profile() {
+  const containerStyle = {
+    display: 'grid',
+    gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))',
+    gap: '60px',
+    alignItems: 'start'
+  };
+
   return (
-    <div className="fade-in" style={{ width: '100%', maxWidth: '1200px', margin: '0 auto', padding: '0 20px' }}>
-      <div style={{ 
-        display: 'grid', 
-        // Mengatur kolom: Foto (agak kecil di kiri), Bio, dan Journey
-        gridTemplateColumns: '0.7fr 1.3fr 1fr', 
-        gap: '60px', 
-        alignItems: 'stretch', // Memastikan tinggi elemen dalam grid sama
-        marginTop: '60px'
-      }}>
-        
-        {/* Kolom Kiri: Foto Profil (Tanpa Rounded, Full Height) */}
-        <section style={{ height: '100%' }}>
-          <div style={{
-            width: '100%',
-            height: '100%', // Mengikuti tinggi container grid
-            overflow: 'hidden',
-            backgroundColor: '#f5f5f5'
-          }}>
-            <img 
-              src="/Linkedin-Profile.png"
-              alt="Bagus Profile"
-              style={{
-                width: '100%',
-                height: '100%',
-                objectFit: 'cover', // Menjaga proporsi foto tetap bagus
-                transition: 'filter 0.6s cubic-bezier(0.4, 0, 0.2, 1)',
-                filter: 'grayscale(100%)',
-                cursor: 'crosshair', // Memberikan kesan desain yang unik
-              }}
-              onMouseEnter={(e) => (e.currentTarget.style.filter = 'grayscale(0%)')}
-              onMouseLeave={(e) => (e.currentTarget.style.filter = 'grayscale(100%)')}
-            />
-          </div>
-        </section>
+    <div className="fade-in">
+      <div style={containerStyle}>
+        {/* Foto Section */}
+        <div style={{ height: '500px', backgroundColor: '#f5f5f5', overflow: 'hidden' }}>
+          <img src="/Linkedin-Profile.png" alt="Bagus Profile" style={{
+            width: '100%', height: '100%', objectFit: 'cover', filter: 'grayscale(100%)', transition: '0.5s'
+          }} onMouseEnter={e => e.target.style.filter = 'grayscale(0%)'} onMouseLeave={e => e.target.style.filter = 'grayscale(100%)'} />
+        </div>
 
-        {/* Kolom Tengah: Biography */}
-        <section style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
-          <h2 style={{ fontSize: '10px', letterSpacing: '0.3em', textTransform: 'uppercase', color: '#888', marginBottom: '20px' }}>Biography</h2>
-          <h1 style={{ fontSize: '2.4rem', fontWeight: 300, lineHeight: '1.2', letterSpacing: '-0.03em', margin: 0 }}>
-            From maintaining aircraft to <br />
-            <span style={{ color: '#135bec', fontWeight: 600 }}>engineering digital systems.</span>
+        {/* Bio Section */}
+        <section>
+          <h2 style={{ fontSize: '10px', letterSpacing: '0.3em', textTransform: 'uppercase', color: '#888' }}>Biography</h2>
+          <h1 style={{ fontSize: '2.5rem', fontWeight: 300, lineHeight: '1.2', margin: '20px 0' }}>
+            From maintaining aircraft to <span style={{ color: '#135bec', fontWeight: 600 }}>engineering digital systems.</span>
           </h1>
-          <p style={{ marginTop: '25px', fontSize: '1rem', lineHeight: '1.8', color: '#444', maxWidth: '90%' }}>
-            My fascination with electronics started with electrical, radios and computer. This curiosity led me to the rigorous world of aviation, where I spent years mastering structural integrity and complex systems. Today, I translate that same "zero-error" mindset into fullstack software development.
+          <p style={{ lineHeight: '1.8', color: '#444', fontSize: '1.1rem' }}>
+            My fascination with electronics started with radios and computers. I translate my aviation "zero-error" mindset into fullstack software development.
           </p>
-          
-          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '30px', marginTop: '45px' }}>
+          <div style={{ display: 'flex', gap: '30px', marginTop: '40px' }}>
             <div>
-              <h2 style={{ fontSize: '10px', letterSpacing: '0.2em', textTransform: 'uppercase', color: '#888', marginBottom: '10px' }}>The Arsenal</h2>
-              <p style={{ fontSize: '0.85rem', color: '#666', margin: 0 }}>React, Node.js, AI Integration, Figma.</p>
+              <h4 style={{ fontSize: '10px', textTransform: 'uppercase', color: '#888' }}>The Arsenal</h4>
+              <p style={{ fontSize: '0.9rem' }}>React, Node.js, AI, Figma</p>
             </div>
             <div>
-              <h2 style={{ fontSize: '10px', letterSpacing: '0.2em', textTransform: 'uppercase', color: '#888', marginBottom: '10px' }}>The Approach</h2>
-              <p style={{ fontSize: '0.85rem', color: '#666', margin: 0 }}>Precision-first development & iterative prototyping.</p>
+              <h4 style={{ fontSize: '10px', textTransform: 'uppercase', color: '#888' }}>The Approach</h4>
+              <p style={{ fontSize: '0.9rem' }}>Precision-first development</p>
             </div>
           </div>
         </section>
 
-        {/* Kolom Kanan: Journey */}
-        <section style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', borderLeft: '1px solid #eee', paddingLeft: '40px' }}>
-          <h2 style={{ fontSize: '10px', letterSpacing: '0.3em', textTransform: 'uppercase', color: '#888', marginBottom: '30px' }}>The Journey</h2>
-          <div>
-            {[
-              { year: '2013 — 2021', title: 'Aircraft Maintenance Engineer', desc: 'Licensed engineer for high-precision technical services.' },
-              { year: '2021 — Present', title: 'Executive Technical Services', desc: 'Leading technical excellence and problem solving.' },
-              { year: '2026', title: 'Fullstack AI Software', desc: 'Deep engineering at Purwadhika.' }
-            ].map((item, index) => (
-              <div key={index} style={{ marginBottom: '35px', position: 'relative' }}>
-                <div style={{ 
-                  position: 'absolute', 
-                  left: '-44px', 
-                  top: '6px', 
-                  width: '7px', 
-                  height: '7px', 
-                  backgroundColor: index === 2 ? '#135bec' : '#CCC', 
-                  borderRadius: '50%' 
-                }}></div>
-                <h3 style={{ fontSize: '0.95rem', fontWeight: 600, margin: 0 }}>{item.title}</h3>
-                <span style={{ fontSize: '0.8rem', color: '#999' }}>{item.year}</span>
-                <p style={{ marginTop: '8px', color: '#666', fontSize: '0.85rem', lineHeight: '1.5' }}>{item.desc}</p>
-              </div>
-            ))}
-          </div>
+        {/* Journey Section */}
+        <section style={{ borderLeft: '1px solid #eee', paddingLeft: '30px' }}>
+          <h2 style={{ fontSize: '10px', letterSpacing: '0.3em', textTransform: 'uppercase', color: '#888' }}>The Journey</h2>
+          {[
+            { year: '2013-21', title: 'Aircraft Engineer', desc: 'Precision technical services.' },
+            { year: '2026', title: 'Fullstack AI', desc: 'Deep engineering at Purwadhika.' }
+          ].map((item, i) => (
+            <div key={i} style={{ margin: '30px 0' }}>
+              <h3 style={{ fontSize: '1.1rem', margin: 0 }}>{item.title}</h3>
+              <small style={{ color: '#135bec' }}>{item.year}</small>
+              <p style={{ fontSize: '0.9rem', color: '#666' }}>{item.desc}</p>
+            </div>
+          ))}
         </section>
-
       </div>
     </div>
   );
