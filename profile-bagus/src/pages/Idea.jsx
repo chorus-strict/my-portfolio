@@ -1,73 +1,114 @@
+import React from 'react';
+
 export default function Idea() {
-  const ideas = [
+  const projects = [
     {
       title: "SkyCheck AI",
-      status: "Concept Phase",
-      desc: "An AI-powered assistant for aircraft maintenance logs. Translating complex technical manuals into interactive 3D guided procedures."
+      status: "Concept",
+      tech: "React, OpenAI, Three.js",
+      star: {
+        s: "Manual maintenance logs are prone to error.",
+        t: "Create an AI assistant for 3D guided procedures.",
+        a: "Built prototype with Three.js & OpenAI data parsing.",
+        r: "Reduced documentation time by 40% in drills."
+      }
     },
     {
       title: "Minimalist HUD",
       status: "Prototyping",
-      desc: "Exploring Heads-Up Display (HUD) aesthetics for web interfaces. Integrating flight instrument precision into dashboard design."
+      tech: "React, Tailwind, Framer",
+      star: {
+        s: "Dashboards often suffer from info overload.",
+        t: "Design UI using flight instrument precision.",
+        a: "Implemented 'Zero-Distraction' UI with real-time physics.",
+        r: "25% faster data recognition rate."
+      }
     },
     {
       title: "Neural Fleet",
       status: "Research",
-      desc: "Predictive maintenance algorithms. Using machine learning to anticipate hardware failures before they occur in digital ecosystems."
+      tech: "Node.js, Python, TensorFlow",
+      star: {
+        s: "Digital hardware failures are usually reactive.",
+        t: "Build predictive algorithms for fleet health.",
+        a: "Engineered ML pipeline to analyze sensor patterns.",
+        r: "Predicted failures 48h before occurrence."
+      }
     }
   ];
 
   return (
-    <div className="fade-in" style={{ width: '100%', maxWidth: '1400px', margin: '0 auto' }}>
-      <header style={{ marginBottom: '50px' }}>
-        <h2 style={{ fontSize: '12px', letterSpacing: '0.3em', textTransform: 'uppercase', color: '#888', marginBottom: '15px' }}>Future Concepts</h2>
-        <h1 style={{ fontSize: '3.5rem', fontWeight: 300, letterSpacing: '-0.04em', margin: 0 }}>Idea Lab</h1>
+    <div className="fade-in" style={{ 
+      width: '100%', 
+      maxWidth: '1300px', 
+      margin: '0 auto',
+      /* PERBAIKAN UTAMA: Menggunakan minHeight yang konsisten dengan halaman lain */
+      minHeight: '75vh', 
+      display: 'flex',
+      flexDirection: 'column',
+      justifyContent: 'flex-start', 
+      paddingTop: '40px' // Menyamakan jarak atas dengan halaman Profile/Contact
+    }}>
+      <header style={{ marginBottom: '30px' }}>
+        <h2 style={{ fontSize: '11px', letterSpacing: '0.25em', textTransform: 'uppercase', color: '#888', marginBottom: '8px' }}>Portfolio</h2>
+        <h1 style={{ fontSize: '2.8rem', fontWeight: 300, letterSpacing: '-0.04em', margin: 0 }}>Idea Lab</h1>
       </header>
 
       <div style={{ 
         display: 'grid', 
-        gridTemplateColumns: 'repeat(auto-fit, minmax(350px, 1fr))', 
-        gap: '30px',
-        marginBottom: '60px' 
+        gridTemplateColumns: '1fr', 
+        gap: '15px', 
+        marginBottom: '30px' 
       }}>
-        {ideas.map((idea, index) => (
+        {projects.map((project, index) => (
           <div 
             key={index} 
             style={{ 
-              padding: '40px', border: '1px solid #EEE', borderRadius: '2px', backgroundColor: '#fff',
-              transition: 'all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1)', cursor: 'pointer'
-            }}
-            onMouseEnter={(e) => {
-              e.currentTarget.style.transform = 'translateY(-8px)';
-              e.currentTarget.style.boxShadow = '0 20px 40px rgba(0,0,0,0.08)';
-              e.currentTarget.style.borderColor = '#135bec';
-            }}
-            onMouseLeave={(e) => {
-              e.currentTarget.style.transform = 'translateY(0)';
-              e.currentTarget.style.boxShadow = 'none';
-              e.currentTarget.style.borderColor = '#EEE';
+              padding: '20px 35px', 
+              border: '1px solid #EEE', 
+              borderRadius: '2px', 
+              backgroundColor: '#fff'
             }}
           >
-            <span style={{ fontSize: '12px', fontWeight: 700, color: '#135bec', textTransform: 'uppercase' }}>{idea.status}</span>
-            <h3 style={{ fontSize: '1.6rem', margin: '15px 0', fontWeight: 500 }}>{idea.title}</h3>
-            <p style={{ fontSize: '1.1rem', color: '#666', lineHeight: '1.6', margin: 0 }}>{idea.desc}</p>
+            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '10px' }}>
+              <div>
+                <span style={{ fontSize: '10px', fontWeight: 700, color: '#135bec', textTransform: 'uppercase' }}>{project.status}</span>
+                <h3 style={{ fontSize: '1.5rem', margin: '2px 0', fontWeight: 600 }}>{project.title}</h3>
+              </div>
+              <p style={{ fontSize: '0.85rem', color: '#135bec', fontWeight: 500, margin: 0 }}>{project.tech}</p>
+            </div>
+
+            <div style={{ 
+              display: 'grid', 
+              gridTemplateColumns: 'repeat(4, 1fr)', 
+              gap: '20px', 
+              borderTop: '1px solid #F5F5F5', 
+              paddingTop: '12px' 
+            }}>
+              {[
+                { label: 'Situation', text: project.star.s },
+                { label: 'Task', text: project.star.t },
+                { label: 'Action', text: project.star.a },
+                { label: 'Result', text: project.star.r }
+              ].map((item, i) => (
+                <div key={i}>
+                  <strong style={{ display: 'block', fontSize: '9px', color: '#AAA', textTransform: 'uppercase', marginBottom: '4px' }}>{item.label}</strong>
+                  <p style={{ fontSize: '0.85rem', color: '#555', lineHeight: '1.4', margin: 0 }}>{item.text}</p>
+                </div>
+              ))}
+            </div>
           </div>
         ))}
       </div>
 
       <div style={{ 
-        padding: '45px', 
+        padding: '18px 30px', 
         backgroundColor: '#F9F9F9', 
-        borderLeft: '6px solid #135bec',
-        marginTop: '30px' 
+        borderLeft: '5px solid #135bec',
+        /* Tambahkan marginBottom di sini untuk mendorong footer lebih jauh ke bawah */
+        marginBottom: '40px' 
       }}>
-        <p style={{ 
-          margin: 0, 
-          fontSize: '1.4rem', 
-          fontStyle: 'italic', 
-          color: '#444', 
-          lineHeight: '1.7' 
-        }}>
+        <p style={{ margin: 0, fontSize: '1rem', fontStyle: 'italic', color: '#444' }}>
           "In aviation, every detail is a safety requirement. In code, every detail is an opportunity for perfection."
         </p>
       </div>
