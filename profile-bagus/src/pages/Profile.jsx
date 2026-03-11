@@ -21,7 +21,7 @@ export default function Profile() {
             backgroundColor: '#f5f5f5'
           }}>
             <img 
-              src="/public/Linkedin-Profile.png" 
+              src="/Linkedin-Profile.png"
               alt="Bagus Profile"
               style={{
                 width: '100%',
