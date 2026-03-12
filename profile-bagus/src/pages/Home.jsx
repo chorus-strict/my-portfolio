@@ -23,7 +23,7 @@ export default function Home() {
           margin: '0 0 30px 0' 
         }}>
           I'm <span style={{ fontWeight: 700, color: '#135bec' }}>Bagus.</span><br />
-          I build digital quality.
+          I build digital experiences.
         </h1>
         
         <div style={{ marginBottom: '50px', fontSize: '1.4rem', lineHeight: '1.8', color: '#888' }}>
