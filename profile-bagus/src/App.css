@@ -133,9 +133,14 @@ body {
 
 /* --- KHUSUS MOBILE (Layar di bawah 1024px) --- */
 @media (max-width: 1024px) {
-  body { overflow-x: hidden; }
+  body { 
+    overflow-x: hidden; 
+  }
   
-  .navbar { padding: 20px 40px; }
+  .navbar { 
+    padding: 20px 40px; 
+    position: relative; /* Menjaga koordinat */
+  }
 
   /* Munculkan Hamburger */
   .hamburger {
@@ -146,23 +151,11 @@ body {
     z-index: 1100;
   }
 
-  .hamburger span {
-    width: 25px;
-    height: 2px;
-    background: var(--text-primary);
-    transition: 0.3s;
-  }
-
-  /* Animasi X */
-  .hamburger.is-active span:nth-child(1) { transform: translateY(8px) rotate(45deg); }
-  .hamburger.is-active span:nth-child(2) { opacity: 0; }
-  .hamburger.is-active span:nth-child(3) { transform: translateY(-8px) rotate(-45deg); }
-
-  /* Overlay Menu */
+  /* Overlay Menu - Perbaikan Utama di Sini */
   .nav-links {
     position: fixed;
     top: 0;
-    right: 0;
+    left: 0; /* Mulai dari kiri layar */
     height: 100vh;
     width: 100%;
     background: white;
@@ -170,25 +163,36 @@ body {
     justify-content: center;
     align-items: center;
     gap: 30px;
-    transform: translateX(100%); /* Sembunyi di kanan */
-    transition: 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    
+    /* Menghilangkan menu sepenuhnya saat tidak aktif */
+    visibility: hidden; 
+    opacity: 0;
+    transform: translateY(-20px); /* Sedikit efek melayang dari atas */
+    
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    z-index: 1050;
   }
 
+  /* Ketika Hamburger Ditekan */
   .nav-links.show {
-    transform: translateX(0); /* Muncul */
+    visibility: visible;
+    opacity: 1;
+    transform: translateY(0);
   }
 
-  .nav-links a { font-size: 20px; }
+  .nav-links a { 
+    font-size: 24px; 
+    letter-spacing: 4px;
+  }
   
-  /* Hilangkan efek titik navigasi di mobile */
+  /* Sisanya tetap sama */
   .nav-links a.active::after { display: none; }
-
-  /* Perbaikan Grid Page Home/Profile agar ke bawah (stack) */
   .content { padding: 40px 20px; }
   .content > div { 
     display: flex !important; 
     flex-direction: column !important; 
-    gap: 50px !important; 
+    gap: 40px !important; 
     text-align: center;
+    align-items: center;
   }
 }
