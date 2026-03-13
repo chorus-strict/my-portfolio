@@ -25,22 +25,22 @@ function App() {
     <Router>
       <div className={`app-container ${isMenuOpen ? 'menu-active' : ''}`}>
         <nav className="navbar">
-          {/* 2. Ubah <div className="nav-logo"> menjadi <Link> 
+          {/* 2. Ubah <div className="nav-logo"> menjadi <Link>
             dan tambahkan properti 'to="/"' serta 'onClick={closeMenu}'
-            tambahkan style textDecoration: 'none' dan color: 'inherit' 
+            tambahkan style textDecoration: 'none' dan color: 'inherit'
             agar tampilan tetap sama (hitam/sesuai tema).
           */}
-          <Link 
-            to="/" 
-            className="nav-logo" 
+          <Link
+            to="/"
+            className="nav-logo"
             onClick={closeMenu}
             style={{ textDecoration: 'none', color: 'inherit' }}
           >
             Bagus.
           </Link>
           
-          <div 
-            className={`hamburger ${isMenuOpen ? 'is-active' : ''}`} 
+          <div
+            className={`hamburger ${isMenuOpen ? 'is-active' : ''}`}
             onClick={() => setIsMenuOpen(!isMenuOpen)}
           >
             <span className="line"></span>
@@ -53,7 +53,7 @@ function App() {
             <NavLink to="/profile" onClick={closeMenu}>Profile</NavLink>
             <NavLink to="/idea" onClick={closeMenu}>Idea</NavLink>
             <NavLink to="/capabilities" onClick={closeMenu}>Capabilities</NavLink>
-            <NavLink to="/contact" onClick={closeMenu}>Contact</NavLink> 
+            <NavLink to="/contact" onClick={closeMenu}>Contact</NavLink>
           </div>
         </nav>
 
