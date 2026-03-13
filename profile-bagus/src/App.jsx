@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { BrowserRouter as Router, Routes, Route, NavLink } from 'react-router-dom';
 import Home from './pages/Home';
 import Profile from './pages/Profile';
@@ -7,18 +8,34 @@ import MyContact from './pages/My-Contact';
 import './App.css';
 
 function App() {
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+
+  // Fungsi untuk menutup menu saat link diklik
+  const closeMenu = () => setIsMenuOpen(false);
+
   return (
     <Router>
-      <div className="app-container">
+      <div className={`app-container ${isMenuOpen ? 'menu-active' : ''}`}>
         <nav className="navbar">
           <div className="nav-logo">Bagus.</div>
-          <div className="nav-links">
-            <NavLink to="/" end>Home</NavLink>
-            <NavLink to="/profile">Profile</NavLink>
-            <NavLink to="/idea">Idea</NavLink>
-            <NavLink to="/capabilities">Capabilities</NavLink>
-            {/* 2. Tambahkan Link Navigasi ke Contact */}
-            <NavLink to="/contact">Contact</NavLink> 
+          
+          {/* Tombol Hamburger ala Purwadhika */}
+          <div 
+            className={`hamburger ${isMenuOpen ? 'is-active' : ''}`} 
+            onClick={() => setIsMenuOpen(!isMenuOpen)}
+          >
+            <span className="line"></span>
+            <span className="line"></span>
+            <span className="line"></span>
+          </div>
+
+          {/* Nav Links dengan Overlay */}
+          <div className={`nav-links ${isMenuOpen ? 'show' : ''}`}>
+            <NavLink to="/" end onClick={closeMenu}>Home</NavLink>
+            <NavLink to="/profile" onClick={closeMenu}>Profile</NavLink>
+            <NavLink to="/idea" onClick={closeMenu}>Idea</NavLink>
+            <NavLink to="/capabilities" onClick={closeMenu}>Capabilities</NavLink>
+            <NavLink to="/contact" onClick={closeMenu}>Contact</NavLink> 
           </div>
         </nav>
 
@@ -28,7 +45,6 @@ function App() {
             <Route path="/profile" element={<Profile />} />
             <Route path="/idea" element={<Idea />} />
             <Route path="/capabilities" element={<Capabilities />} />
-            {/* 3. Daftarkan Route agar path /contact bisa diakses */}
             <Route path="/contact" element={<MyContact />} />
           </Routes>
         </main>
