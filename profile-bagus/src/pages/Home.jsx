@@ -26,27 +26,32 @@ export default function Home() {
           I build digital experiences.
         </h1>
         
-        <div style={{ marginBottom: '50px', fontSize: '1.4rem', lineHeight: '1.8', color: '#888' }}>
+        {/* Menggunakan variabel warna sekunder yang lebih gelap */}
+        <div style={{ marginBottom: '50px', fontSize: '1.4rem', lineHeight: '1.8', color: 'var(--text-secondary)' }}>
           <p style={{ margin: 0 }}>Minimalist by design.</p>
           <p style={{ margin: 0 }}>Functional by nature.</p>
           <p style={{ margin: 0, color: '#1A1A1A', fontWeight: 500 }}>Crafted by Bagus.</p>
         </div>
+
         <Link to="/contact" style={{ textDecoration: 'none' }}>
-         <button style={{
-            padding: '20px 60px',
-            backgroundColor: '#1A1A1A',
-            color: 'white',
-            border: 'none',
-            fontSize: '14px',
-            fontWeight: 600,
-            letterSpacing: '0.2em',
-            textTransform: 'uppercase',
-            cursor: 'pointer',
-            transition: 'all 0.3s ease'
+         <button 
+            aria-label="Contact Bagus"
+            style={{
+              padding: '20px 60px',
+              backgroundColor: '#1A1A1A',
+              color: 'white',
+              border: 'none',
+              fontSize: '14px',
+              fontWeight: 600,
+              letterSpacing: '0.2em',
+              textTransform: 'uppercase',
+              cursor: 'pointer',
+              transition: 'all 0.3s ease',
+              minHeight: '48px' /* Standar area klik Lighthouse */
             }}
             onMouseEnter={(e) => e.currentTarget.style.backgroundColor = '#135bec'}
             onMouseLeave={(e) => e.currentTarget.style.backgroundColor = '#1A1A1A'}
-            >
+          >
               Contact Me
         </button>
         </Link>
@@ -68,7 +73,8 @@ export default function Home() {
         }}>
           <img 
             src={`${window.location.origin}/buntut.webp`} 
-            alt="Bagus Home"
+            alt="Bagus Home Image"
+            loading="eager" /* Diutamakan load agar skor LCP meningkat */
             style={{
               width: '100%',
               height: '100%',
@@ -101,9 +107,9 @@ export default function Home() {
             <p style={{ fontSize: '12px', letterSpacing: '0.2em', textTransform: 'uppercase', margin: '0 0 6px 0', fontWeight: 700 }}>
               IMAGE SOURCE FROM
             </p>
-            <h3 style={{ fontSize: '1.8rem', margin: 0, fontWeight: 400, textShadow: '0 2px 10px rgba(0,0,0,0.5)' }}>
+            <h2 style={{ fontSize: '1.8rem', margin: 0, fontWeight: 400, textShadow: '0 2px 10px rgba(0,0,0,0.5)' }}>
               www.businesstimes.com.sg
-            </h3>
+            </h2>
           </div>
         </div>
       </section>

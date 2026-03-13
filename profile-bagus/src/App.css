@@ -1,7 +1,8 @@
 :root {
   --bg-color: #ffffff;
   --text-primary: #1A1A1A;
-  --text-secondary: #64748b;
+  /* Dipergelap untuk aksesibilitas kontras yang lebih baik */
+  --text-secondary: #525252; 
   --accent: #135bec;
 }
 
@@ -11,8 +12,7 @@ body {
   background-color: var(--bg-color);
   color: var(--text-primary);
   -webkit-font-smoothing: antialiased;
-  /* Mencegah scroll horizontal secara global */
-  overflow-x: hidden;
+  overflow-x: hidden; /* Mencegah geser kanan-kiri */
 }
 
 body.menu-open {
@@ -91,11 +91,11 @@ body.menu-open {
   justify-content: space-between;
   align-items: center;
   font-size: 0.9rem;
-  color: #888;
+  color: var(--text-secondary); /* Dipergelap sesuai Lighthouse */
   width: 100%;
 }
 
-/* --- RESPONSIVE MOBILE (1024px kebawah) --- */
+/* --- RESPONSIVE MOBILE --- */
 @media (max-width: 1024px) {
   .navbar { padding: 20px 25px; }
 
@@ -139,10 +139,7 @@ body.menu-open {
     transform: translateY(0);
   }
 
-  .content { 
-    padding: 20px !important; 
-    overflow-x: hidden; /* Tambahan pengaman */
-  }
+  .content { padding: 20px !important; }
   
   .content > div, 
   .content section,
@@ -155,18 +152,16 @@ body.menu-open {
     width: 100% !important;
   }
 
-  /* Perbaikan Foto Profil agar tidak terpotong wajahnya */
   img {
     width: 100% !important;
     height: auto !important;
     max-height: 500px;
     object-fit: cover;
-    object-position: top; /* Fokus ke area wajah di atas */
+    object-position: top; /* Agar muka tidak terpotong */
   }
 
-  /* Menangani teks email panjang agar tidak meluap ke kanan */
   .content a, .content span {
-    word-break: break-all; /* Memaksa teks panjang turun ke bawah */
+    word-break: break-all;
     white-space: normal;
   }
 
