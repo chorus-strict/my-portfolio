@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
-import { BrowserRouter as Router, Routes, Route, NavLink } from 'react-router-dom';
+/* 1. Tambahkan 'Link' ke dalam import dari react-router-dom */
+import { BrowserRouter as Router, Routes, Route, NavLink, Link } from 'react-router-dom';
 import Home from './pages/Home';
 import Profile from './pages/Profile';
 import Idea from './pages/Idea';
@@ -10,10 +11,8 @@ import './App.css';
 function App() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
-  // Fungsi untuk menutup menu saat link diklik
   const closeMenu = () => setIsMenuOpen(false);
 
-  // Mengunci scroll body saat menu overlay terbuka agar tidak bisa scroll ke bawah
   useEffect(() => {
     if (isMenuOpen) {
       document.body.classList.add('menu-open');
@@ -26,13 +25,24 @@ function App() {
     <Router>
       <div className={`app-container ${isMenuOpen ? 'menu-active' : ''}`}>
         <nav className="navbar">
-          <div className="nav-logo">Bagus.</div>
+          {/* 2. Ubah <div className="nav-logo"> menjadi <Link> 
+            dan tambahkan properti 'to="/"' serta 'onClick={closeMenu}'
+            tambahkan style textDecoration: 'none' dan color: 'inherit' 
+            agar tampilan tetap sama (hitam/sesuai tema).
+          */}
+          <Link 
+            to="/" 
+            className="nav-logo" 
+            onClick={closeMenu}
+            style={{ textDecoration: 'none', color: 'inherit' }}
+          >
+            Bagus.
+          </Link>
           
           <div 
             className={`hamburger ${isMenuOpen ? 'is-active' : ''}`} 
             onClick={() => setIsMenuOpen(!isMenuOpen)}
           >
-            {/* Tambahkan class "line" di sini agar terbaca CSS */}
             <span className="line"></span>
             <span className="line"></span>
             <span className="line"></span>
