@@ -11,24 +11,20 @@ body {
   background-color: var(--bg-color);
   color: var(--text-primary);
   -webkit-font-smoothing: antialiased;
-  font-size: 18px; 
 }
 
-.app-container {
-  display: flex;
-  flex-direction: column;
-  min-height: 100vh;
+body.menu-open {
+  overflow: hidden;
 }
 
-/* --- NAVBAR DESKTOP --- */
+/* --- NAVBAR DESKTOP (Default) --- */
 .navbar {
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding: 40px 80px;
-  background: rgba(255, 255, 255, 0.9);
-  backdrop-filter: blur(10px);
-  z-index: 2000; /* Ditinggikan agar selalu di atas */
+  background: white;
+  z-index: 3000;
   width: 100%;
   box-sizing: border-box;
   position: sticky;
@@ -36,20 +32,19 @@ body {
 }
 
 .nav-logo {
-  font-size: 32px;
+  font-size: 28px;
   font-weight: 700;
   letter-spacing: -1.5px;
-  color: var(--text-primary);
-  z-index: 2001; /* Tetap di atas overlay */
 }
 
+/* Sembunyikan Hamburger di Desktop secara total */
 .hamburger {
-  display: none; /* Sembunyi di desktop */
+  display: none; 
 }
 
 .nav-links {
   display: flex;
-  gap: 45px; 
+  gap: 40px;
 }
 
 .nav-links a {
@@ -58,45 +53,29 @@ body {
   font-size: 13px;
   text-transform: uppercase;
   letter-spacing: 2px;
-  font-weight: 400;
-  transition: all 0.3s ease;
-  position: relative;
+  transition: 0.3s;
 }
 
 .nav-links a.active {
-  color: var(--accent) !important;
+  color: var(--accent);
   font-weight: 600;
 }
 
-.nav-links a.active::after {
-  content: '';
-  position: absolute;
-  bottom: -10px;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 6px;
-  height: 6px;
-  background-color: var(--accent);
-  border-radius: 50%;
-}
-
-/* --- KONTEN & FOOTER --- */
+/* --- KONTEN DESKTOP --- */
 .content {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
   padding: 0 80px;
-  max-width: 1500px;
+  max-width: 1400px;
   margin: 0 auto;
   width: 100%;
   box-sizing: border-box;
 }
 
+/* --- FOOTER DESKTOP --- */
 .global-footer {
-  padding: 20px 80px 50px 80px;
-  max-width: 1500px;
-  margin: 0 auto;
   width: 100%;
+  max-width: 1400px; /* Sejajar dengan lebar konten utama */
+  margin: 80px auto 40px auto; /* Margin auto untuk memposisikan di tengah */
+  padding: 0 80px; 
   box-sizing: border-box;
 }
 
@@ -109,101 +88,89 @@ body {
 
 .footer-content {
   display: flex;
-  justify-content: space-between;
+  justify-content: space-between; /* Deskripsi di kiri, copyright di kanan */
   align-items: center;
-  font-size: 1rem;
+  font-size: 0.9rem;
   color: #888;
+  width: 100%;
 }
 
-.fade-in {
-  animation: fadeIn 0.8s ease-out forwards;
-}
-
-@keyframes fadeIn {
-  from { opacity: 0; transform: translateY(10px); }
-  to { opacity: 1; transform: translateY(0); }
-}
-
-/* --- KHUSUS MOBILE (Layar di bawah 1024px) --- */
+/* --- RESPONSIVE MOBILE (Hanya aktif di bawah 1024px) --- */
 @media (max-width: 1024px) {
-  body { overflow-x: hidden; }
-  
-  .navbar { 
-    padding: 20px 30px; 
-    background: #fff; /* Solid di mobile agar tidak tembus overlay */
+  .navbar {
+    padding: 20px 25px;
   }
 
-  /* Munculkan Hamburger */
   .hamburger {
-    display: flex;
+    display: flex; /* Munculkan di mobile */
     flex-direction: column;
-    gap: 6px;
+    gap: 5px;
     cursor: pointer;
-    z-index: 2100; /* Paling atas */
+    z-index: 3001;
   }
 
-  .hamburger span {
-    width: 28px;
+  .hamburger .line {
+    width: 25px;
     height: 2px;
     background: var(--text-primary);
-    transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    transition: 0.4s;
   }
 
   /* Animasi X */
-  .hamburger.is-active span:nth-child(1) { transform: translateY(8px) rotate(45deg); }
-  .hamburger.is-active span:nth-child(2) { opacity: 0; }
-  .hamburger.is-active span:nth-child(3) { transform: translateY(-8px) rotate(-45deg); }
+  .hamburger.is-active .line:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+  .hamburger.is-active .line:nth-child(2) { opacity: 0; }
+  .hamburger.is-active .line:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
 
-  /* Overlay Menu - Versi Perbaikan */
   .nav-links {
     position: fixed;
-    top: 0;
-    right: 0;
-    height: 100vh;
-    width: 100%;
+    inset: 0;
     background: white;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    gap: 35px;
+    gap: 30px;
+    z-index: 2500;
     
-    /* Sembunyikan total di kanan luar layar */
     visibility: hidden;
-    transform: translateX(100%); 
-    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-    z-index: 2050;
+    opacity: 0;
+    transform: translateY(-10px);
+    transition: all 0.4s ease-in-out;
   }
 
-  /* Ketika Aktif */
   .nav-links.show {
     visibility: visible;
-    transform: translateX(0);
+    opacity: 1;
+    transform: translateY(0);
   }
 
-  .nav-links a { 
-    font-size: 22px; 
-    letter-spacing: 4px;
+  .nav-links a {
+    font-size: 24px;
     color: var(--text-primary);
   }
-  
-  .nav-links a.active::after { display: none; }
 
-  /* Perbaikan Layout Halaman */
-  .content { padding: 40px 20px; }
-  
-  /* Memaksa elemen Home/Profile untuk susun vertikal di mobile */
-  .content > div { 
-    display: flex !important; 
-    flex-direction: column !important; 
-    gap: 40px !important; 
+  /* Reset layout halaman di mobile agar stack vertikal */
+  .content {
+    padding: 20px !important;
+  }
+
+  .content > div {
+    display: flex !important;
+    flex-direction: column !important;
     text-align: center !important;
-    align-items: center !important;
+    gap: 40px !important;
+    width: 100% !important;
+    max-width: 100% !important;
   }
 
   /* Footer Mobile */
+  .global-footer {
+    padding: 0 25px;
+    margin: 40px auto 20px auto;
+  }
+
   .footer-content {
-    flex-direction: column;
-    gap: 20px;
+    flex-direction: column; /* Tumpuk vertikal di HP */
+    gap: 15px;
     text-align: center;
   }
 }
