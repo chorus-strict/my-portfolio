@@ -1,6 +1,9 @@
 import { useState, useEffect } from 'react';
-/* 1. Tambahkan 'Link' ke dalam import dari react-router-dom */
+/* 1. Import Link dan komponen navigasi lainnya */
 import { BrowserRouter as Router, Routes, Route, NavLink, Link } from 'react-router-dom';
+/* 2. Import SpeedInsights dari Vercel */
+import { SpeedInsights } from "@vercel/speed-insights/react";
+
 import Home from './pages/Home';
 import Profile from './pages/Profile';
 import Idea from './pages/Idea';
@@ -25,11 +28,7 @@ function App() {
     <Router>
       <div className={`app-container ${isMenuOpen ? 'menu-active' : ''}`}>
         <nav className="navbar">
-          {/* 2. Ubah <div className="nav-logo"> menjadi <Link>
-            dan tambahkan properti 'to="/"' serta 'onClick={closeMenu}'
-            tambahkan style textDecoration: 'none' dan color: 'inherit'
-            agar tampilan tetap sama (hitam/sesuai tema).
-          */}
+          {/* Logo dengan fungsi kembali ke Home */}
           <Link
             to="/"
             className="nav-logo"
@@ -75,6 +74,9 @@ function App() {
           </div>
         </footer>
       </div>
+      
+      {/* 3. Letakkan komponen SpeedInsights di sini agar memantau seluruh aplikasi */}
+      <SpeedInsights />
     </Router>
   );
 }
