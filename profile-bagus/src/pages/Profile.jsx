@@ -13,7 +13,7 @@ export default function Profile() {
         <section style={{ height: '100%' }}>
           <div style={{ width: '100%', height: '100%', overflow: 'hidden', backgroundColor: '#f5f5f5' }}>
             <img 
-              src="/Linkedin-Profile.webp"
+              src={`${window.location.origin}/Linkedin-Profile.webp`}
               alt="Bagus Profile"
               style={{
                 width: '100%',

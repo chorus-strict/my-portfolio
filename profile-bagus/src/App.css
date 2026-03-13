@@ -17,7 +17,7 @@ body.menu-open {
   overflow: hidden;
 }
 
-/* --- NAVBAR DESKTOP (Default) --- */
+/* --- NAVBAR DESKTOP --- */
 .navbar {
   display: flex;
   justify-content: space-between;
@@ -37,7 +37,6 @@ body.menu-open {
   letter-spacing: -1.5px;
 }
 
-/* Sembunyikan Hamburger di Desktop secara total */
 .hamburger {
   display: none; 
 }
@@ -61,7 +60,7 @@ body.menu-open {
   font-weight: 600;
 }
 
-/* --- KONTEN DESKTOP --- */
+/* --- KONTEN & FOOTER --- */
 .content {
   padding: 0 80px;
   max-width: 1400px;
@@ -70,11 +69,10 @@ body.menu-open {
   box-sizing: border-box;
 }
 
-/* --- FOOTER DESKTOP --- */
 .global-footer {
   width: 100%;
-  max-width: 1400px; /* Sejajar dengan lebar konten utama */
-  margin: 80px auto 40px auto; /* Margin auto untuk memposisikan di tengah */
+  max-width: 1400px;
+  margin: 80px auto 40px auto;
   padding: 0 80px; 
   box-sizing: border-box;
 }
@@ -88,21 +86,19 @@ body.menu-open {
 
 .footer-content {
   display: flex;
-  justify-content: space-between; /* Deskripsi di kiri, copyright di kanan */
+  justify-content: space-between;
   align-items: center;
   font-size: 0.9rem;
   color: #888;
   width: 100%;
 }
 
-/* --- RESPONSIVE MOBILE (Hanya aktif di bawah 1024px) --- */
+/* --- RESPONSIVE MOBILE (1024px kebawah) --- */
 @media (max-width: 1024px) {
-  .navbar {
-    padding: 20px 25px;
-  }
+  .navbar { padding: 20px 25px; }
 
   .hamburger {
-    display: flex; /* Munculkan di mobile */
+    display: flex;
     flex-direction: column;
     gap: 5px;
     cursor: pointer;
@@ -116,7 +112,6 @@ body.menu-open {
     transition: 0.4s;
   }
 
-  /* Animasi X */
   .hamburger.is-active .line:nth-child(1) { transform: translateY(7px) rotate(45deg); }
   .hamburger.is-active .line:nth-child(2) { opacity: 0; }
   .hamburger.is-active .line:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
@@ -130,7 +125,6 @@ body.menu-open {
     align-items: center;
     gap: 30px;
     z-index: 2500;
-    
     visibility: hidden;
     opacity: 0;
     transform: translateY(-10px);
@@ -143,34 +137,33 @@ body.menu-open {
     transform: translateY(0);
   }
 
-  .nav-links a {
-    font-size: 24px;
-    color: var(--text-primary);
-  }
-
-  /* Reset layout halaman di mobile agar stack vertikal */
-  .content {
-    padding: 20px !important;
-  }
-
-  .content > div {
+  /* PAKSA SEMUA GRID MENJADI SATU KOLOM (Fungsi Panah Biru) */
+  .content { padding: 20px !important; }
+  
+  /* Target semua div yang pakai display: grid di file JSX */
+  .content > div, 
+  .content section,
+  .content div[style*="display: grid"],
+  .content div[style*="display: flex"] {
     display: flex !important;
-    flex-direction: column !important;
-    text-align: center !important;
+    flex-direction: column !important; /* Kanan pindah ke bawah */
+    grid-template-columns: 1fr !important;
     gap: 40px !important;
     width: 100% !important;
-    max-width: 100% !important;
   }
+
+  /* Perbaikan Gambar agar tidak hilang atau gepeng */
+  img {
+    width: 100% !important;
+    height: auto !important;
+    max-height: 400px;
+    object-fit: cover;
+  }
+
+  /* Hilangkan garis kiri/border yang mengganggu di mobile */
+  section { border-left: none !important; padding-left: 0 !important; }
 
   /* Footer Mobile */
-  .global-footer {
-    padding: 0 25px;
-    margin: 40px auto 20px auto;
-  }
-
-  .footer-content {
-    flex-direction: column; /* Tumpuk vertikal di HP */
-    gap: 15px;
-    text-align: center;
-  }
+  .global-footer { padding: 0 25px; margin: 40px auto 20px auto; }
+  .footer-content { flex-direction: column; gap: 15px; text-align: center; }
 }
