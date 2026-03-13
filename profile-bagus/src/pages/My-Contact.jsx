@@ -9,7 +9,7 @@ export default function MyContact() {
   ];
 
   return (
-    <div className="fade-in" style={{ width: '100%', maxWidth: '1400px', margin: '0 auto' }}>
+    <div className="fade-in" style={{ width: '100%', maxWidth: '1400px', margin: '0 auto', overflowX: 'hidden' }}>
       <div style={{ 
         display: 'grid', 
         gridTemplateColumns: '1.2fr 1fr', 
@@ -20,7 +20,7 @@ export default function MyContact() {
         
         <section>
           <h2 style={{ fontSize: '12px', letterSpacing: '0.3em', textTransform: 'uppercase', color: '#888', marginBottom: '20px' }}>Initiate Connection</h2>
-          <h1 style={{ fontSize: '4.5rem', fontWeight: 300, lineHeight: '1.1', letterSpacing: '-0.05em', margin: 0 }}>
+          <h1 style={{ fontSize: 'clamp(2.5rem, 8vw, 4.5rem)', fontWeight: 300, lineHeight: '1.1', letterSpacing: '-0.05em', margin: 0 }}>
             Let's build something <br />
             <span style={{ color: '#135bec', fontWeight: 600 }}>technically sound.</span>
           </h1>
@@ -48,10 +48,10 @@ export default function MyContact() {
           </div>
         </section>
 
-        <section style={{ marginTop: '30px' }}>
+        <section style={{ marginTop: '30px', width: '100%', boxSizing: 'border-box' }}>
           <div style={{ borderTop: '3px solid #135bec', paddingTop: '40px' }}>
             {contactDetails.map((contact, index) => (
-              <div key={index} style={{ marginBottom: '50px' }}>
+              <div key={index} style={{ marginBottom: '50px', width: '100%' }}>
                 <p style={{ fontSize: '12px', letterSpacing: '0.2em', textTransform: 'uppercase', color: '#999', margin: '0 0 15px 0' }}>
                   {contact.label}
                 </p>
@@ -61,12 +61,15 @@ export default function MyContact() {
                     target="_blank" 
                     rel="noopener noreferrer"
                     style={{ 
-                      fontSize: '1.8rem', 
+                      fontSize: 'clamp(1.2rem, 5vw, 1.8rem)', /* Mengecilkan teks di HP agar tidak meluap */
                       color: '#1A1A1A', 
                       textDecoration: 'none',
                       fontWeight: 400,
                       transition: 'all 0.3s ease',
-                      borderBottom: '2px solid transparent'
+                      borderBottom: '2px solid transparent',
+                      wordBreak: 'break-all', /* Memotong teks panjang */
+                      display: 'inline-block',
+                      maxWidth: '100%'
                     }}
                     onMouseEnter={(e) => {
                       e.currentTarget.style.color = '#135bec';
@@ -80,7 +83,9 @@ export default function MyContact() {
                     {contact.value}
                   </a>
                 ) : (
-                  <span style={{ fontSize: '1.8rem', color: '#1A1A1A' }}>{contact.value}</span>
+                  <span style={{ fontSize: 'clamp(1.2rem, 5vw, 1.8rem)', color: '#1A1A1A', wordBreak: 'break-word' }}>
+                    {contact.value}
+                  </span>
                 )}
               </div>
             ))}
